@@ -179,7 +179,6 @@ async function main() {
   }
 
   currentSong.addEventListener("timeupdate", () => {
-    // Only update the time if the user is NOT dragging the circle
     if (!document.body.classList.contains('dragging')) {
         document.querySelector(".songtime").textContent = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`;
         document.querySelector(".circle").style.left = (currentSong.currentTime / (currentSong.duration || 1)) * 100 + "%";
@@ -204,40 +203,44 @@ async function main() {
     }
   });
   
-  // Logic for dragging the seekbar circle
+  // Logic for dragging the seekbar circle (works on desktop and mobile)
   const circle = document.getElementById("seek-circle");
   let isDragging = false;
 
-  circle.addEventListener('mousedown', (e) => {
+  function startDrag(e) {
       isDragging = true;
       document.body.classList.add('dragging');
-  });
+      e.preventDefault();
+  }
 
-  window.addEventListener('mousemove', (e) => {
+  function doDrag(e) {
       if (isDragging) {
+          e.preventDefault();
+          const clientX = e.clientX || e.touches[0].clientX;
           const rect = seekbar.getBoundingClientRect();
-          let offsetX = e.clientX - rect.left;
+          let offsetX = clientX - rect.left;
           
           if (offsetX < 0) offsetX = 0;
           if (offsetX > rect.width) offsetX = rect.width;
           
           let percent = (offsetX / rect.width) * 100;
           circle.style.left = percent + "%";
-          // Also update the time display in real-time while dragging
+          
           if (currentSong.duration) {
               const newTime = (currentSong.duration * percent) / 100;
               document.querySelector(".songtime").textContent = `${formatTime(newTime)}/${formatTime(currentSong.duration)}`;
           }
       }
-  });
+  }
 
-  window.addEventListener('mouseup', (e) => {
+  function stopDrag(e) {
       if (isDragging) {
           isDragging = false;
           document.body.classList.remove('dragging');
           
+          const clientX = e.clientX || e.changedTouches[0].clientX;
           const rect = seekbar.getBoundingClientRect();
-          let offsetX = e.clientX - rect.left;
+          let offsetX = clientX - rect.left;
 
           if (offsetX < 0) offsetX = 0;
           if (offsetX > rect.width) offsetX = rect.width;
@@ -245,8 +248,19 @@ async function main() {
           let percent = (offsetX / rect.width) * 100;
           currentSong.currentTime = (currentSong.duration * percent) / 100;
       }
-  });
+  }
 
+  // Mouse Events
+  circle.addEventListener('mousedown', startDrag);
+  window.addEventListener('mousemove', doDrag);
+  window.addEventListener('mouseup', stopDrag);
+
+  // Touch Events
+  circle.addEventListener('touchstart', startDrag);
+  window.addEventListener('touchmove', doDrag);
+  window.addEventListener('touchend', stopDrag);
+
+  // Other event listeners
   document.querySelector(".hamburger").addEventListener("click", () => {
     document.querySelector(".left").style.left = "0";
   });
