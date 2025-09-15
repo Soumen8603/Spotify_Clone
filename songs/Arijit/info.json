@@ -1,5 +1,30 @@
 {
-    "title" : "Arijit Singh",
-    "description" : "Best of Arijit",
-     "Artist" : "Arijit Singh"
+  "title": "Arijit Singh Hits",
+  "description": "Best of Arijit",
+  "songs": [
+    {
+      "name": "Ae Dil Hai Mushkil.mp3",
+      "artist": "Arijit Singh"
+    },
+
+    {
+      "name": "Dhun.mp3",
+      "artist": "Arijit Singh"
+    },
+
+    {
+      "name": "Khariyat.mp3",
+      "artist": "Arijit Singh"
+    },
+
+    {
+      "name": "Phir Bhi Tumko.mp3",
+      "artist": "Arijit Singh"
+    },
+
+    {
+      "name": "Teri Saanson Me.mp3",
+      "artist": "Arijit Singh"
+    }
+  ]
 }

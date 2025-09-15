@@ -1,5 +1,35 @@
 {
-    "title" : "KK",
-    "description" : "Best of KK Songs",
-     "Artist" : "KK"
+  "title": "KK Hits",
+  "description": "Best of KK",
+  "songs": [
+    {
+      "name": "Laapata.mp3",
+      "artist": "KK"
+    },
+
+    {
+      "name": "Labon Ko.mp3",
+      "artist": "KK"
+    },
+
+    {
+      "name": "Mat Azma Re.mp3",
+      "artist": "KK"
+    },
+
+    {
+      "name": "Tu Hi Meri Sab Hai.mp3",
+      "artist": "KK"
+    },
+
+    {
+      "name": "Tujhe Sochta Hun.mp3",
+      "artist": "KK"
+    },
+
+    {
+      "name": "Zara Sa.mp3",
+      "artist": "KK"
+    }
+  ]
 }

@@ -1,0 +1,35 @@
+{
+  "title": "Ap Dhillon Hits",
+  "description": "Best of Ap Dhillon",
+  "songs": [
+    {
+    "name":"Brown Munde.mp3",
+    "artist":"Ap Dhilon"
+    },
+    
+    {
+    "name":"Dil Nu.mp3",
+    "artist":"Ap Dhilon"
+    },
+
+    {
+    "name":"Excuses.mp3",
+    "artist":"Ap Dhilon"
+    },
+
+    {
+    "name":"Kehndi Hundi Si.mp3",
+    "artist":"Ap Dhilon"
+    },
+
+    {
+    "name":"Thodi Si Daru.mp3",
+    "artist":"Ap Dhilon"
+    },
+
+    {
+    "name":"With You.mp3",
+    "artist":"Ap Dhilon"
+    }
+]
+}

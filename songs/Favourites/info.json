@@ -1,5 +1,33 @@
 {
-    "title" : "Favourite Songs",
-    "description" : "Songs for you",
-     "Artist" : "Soumen"
+  "title": "Favourite Songs",
+  "description": "Most Played By You",
+  "songs": [
+    {
+      "name": "Deewani Mastani.mp3",
+      "artist": "Shreya Ghoshal"
+    },
+
+    {
+      "name": "Gale Lag Ja.mp3",
+      "artist": "Javed Ali"
+    },
+
+    {
+      "name": "Kabhi Na Kabhi.mp3",
+      "artist": "Aditya Narayan"
+    },
+
+    {
+      "name": "Rishte Naate.mp3",
+      "artist": "Rahat Fateh Ali Khan"
+    },
+
+    {
+      "name": "Wavy.mp3",
+      "artist": "Karan Aujla"
+    }
+
+   
+  ]
 }
+
