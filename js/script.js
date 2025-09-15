@@ -88,7 +88,7 @@ async function displayAlbums() {
             <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
           </svg>
         </div>
-        // CHANGED: Removed leading slash for relative path
+       
         <img src="songs/${album.folder}/cover.jpg" alt="">
         <h2>${album.title}</h2>
         <p>${album.description}</p>
