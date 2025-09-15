@@ -4,6 +4,7 @@
   --a : 0;
 }
 
+/* General Resets and Body */
 * {
   margin: 0;
   padding: 0;
@@ -15,6 +16,7 @@ body {
   color: white;
 }
 
+/* Left Panel Layout */
 .left {
   width: 25vw;
   padding: 10px;
@@ -28,6 +30,12 @@ body {
   padding-top: 14px;
   font-weight: bold;
 }
+
+.library {
+  min-height: 80vh;
+  position: relative;
+}
+
 .heading {
   display: flex;
   gap: 12px;
@@ -42,42 +50,45 @@ body {
 .heading img {
   width: 25px;
 }
-.library {
-  min-height: 80vh;
-  position: relative;
-}
+
 .footer {
   display: flex;
   font-size: 10px;
-  color: gray;
+  color: #a7a7a7;
   gap: 13px;
   position: absolute;
   bottom: 0;
   padding: 10px 0;
+  flex-wrap: wrap;
 }
 .footer a {
-  color: grey;
+  color: #a7a7a7;
 }
+
+/* Right Panel Layout */
 .right {
   width: 75vw;
   margin: 16px 0;
   position: relative;
 }
+
+/* Header and Buttons */
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: rgb(34, 34, 34);
   height: 72px;
+  padding: 0 20px;
 }
-.header > * {
-  padding: 20px;
-}
+
 .buttons > * {
   margin: 0 12px;
 }
+
 .signupbtn {
-  background-color: rgb(34, 34, 34);
-  color: rgb(156, 151, 151);
+  background-color: transparent;
+  color: #a7a7a7;
   font-weight: bold;
   border: none;
   outline: none;
@@ -89,6 +100,7 @@ body {
   transform: scale(1.05);
   color: white;
 }
+
 .loginbtn {
   background-color: white;
   border-radius: 20px;
@@ -104,6 +116,8 @@ body {
   transform: scale(1.05);
   font-weight: bold;
 }
+
+/* Playlist and Cards Section */
 .spotifyPlaylists {
   padding: 16px;
 }
@@ -143,14 +157,14 @@ body {
 }
 .card img {
   width: 100%;
-  /* REMOVED fixed height to allow proportional scaling */
   object-fit: cover;
   border-radius: 6px;
-  aspect-ratio: 1 / 1; /* ADDED this to enforce a square shape */
+  aspect-ratio: 1 / 1;
 }
 .card:hover {
   background-color: #282828;
 }
+
 .play {
   width: 40px;
   height: 40px;
@@ -160,7 +174,6 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* CHANGED from 'top' to 'bottom' for responsive positioning */
   bottom: 75px; 
   right: 15px;
   opacity: 0;
@@ -169,46 +182,17 @@ body {
 }
 .card:hover .play {
   opacity: 1;
-  /* CHANGED from 'top' to 'bottom' for the hover effect */
   bottom: 85px; 
 }
 .play svg {
   margin: auto;
 }
-.playbar {
-  position: absolute;
-  bottom: 0;
-  filter: invert();
-  background-color: #dad5d5;
-  border-radius: 10px;
-  height: 40px;
-  width: 90%;
-  padding: 12px;
-  margin-bottom: 10px;
-}
-.songbuttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-.songbuttons img,
-.songbuttons svg {
-  width: 35px;
-  height: 35px;
-}
+
+/* Song List in Sidebar */
 .songList {
   height: 500px;
   overflow: auto;
   margin-bottom: 44px;
-}
-.hamburgerCont {
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  display: flex;
-}
-.hamburger {
-  display: none;
 }
 .songList ul {
   padding: 0 12px;
@@ -247,52 +231,48 @@ body {
   padding: 6px;
   font-size: 13px;
 }
-.seekbar {
-  height: 4px;
-  width: 97%;
+
+/* Playbar Section */
+.playbar {
+  position: fixed;
+  bottom: 20px;
+  filter: invert();
+  background-color: #dad5d5;
   border-radius: 10px;
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  margin: 6px;
-  left: 3px;
-  right: 3px;
-  cursor: pointer;
+  width: 70vw;
+  padding: 12px;
 }
-.circle {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background-color: black;
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  transform: translateY(-50%);
-  transition: left 0.1s linear;
+.abovebar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
-.close {
-  display: none;
+.songinfo {
+  color: black;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.songbuttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-grow: 1;
 }
 .songbuttons img {
   cursor: pointer;
 }
 .timevol {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
-}
-.songinfo {
-  color: black;
-  padding: 0 12px;
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: 10px;
 }
 .songtime {
   color: black;
-  padding: 0 12px;
-  width: 125px;
+  white-space: nowrap;
 }
 .volume {
   display: flex;
@@ -303,16 +283,45 @@ body {
 .range input {
   cursor: pointer;
 }
-.abovebar {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  margin: -3px 0;
-}
-.songbuttons {
+.seekbar {
+  height: 4px;
+  width: 98%;
+  border-radius: 10px;
+  background-color: black;
+  position: absolute;
+  bottom: 5px;
   margin: 0 auto;
+  left: 1%;
+  cursor: pointer;
 }
+.circle {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: black;
+  position: relative;
+  top: -4.5px;
+  left: 0%;
+  transition: left 0.1s linear;
+}
+
+/* Hamburger Menu */
+.hamburgerCont {
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  display: flex;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+.close {
+  display: none;
+  cursor: pointer;
+}
+
+/* Loader and Disclaimer */
 .loader {
   width: 50px;
   height: 50px;
@@ -328,15 +337,23 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+.disclaimer {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    padding: 20px;
+}
+
+/* ----------- Responsive Design ----------- */
+
 @media (max-width: 1200px) {
   .left {
-    background-color: black;
     position: absolute;
     left: -120%;
-    width: 373px;
-    transition: all 0.3s;
-    z-index: 1;
-    padding: 0;
+    transition: all .3s;
+    z-index: 10;
+    width: 370px;
+    background-color: black;
   }
   .left .close {
     position: absolute;
@@ -349,7 +366,6 @@ body {
     width: 100vw;
     margin: 0;
   }
-
   .playbar {
     position: fixed;
     bottom: 0;
@@ -363,15 +379,11 @@ body {
     z-index: 10;
     height: 100px;
   }
-  
   .spotifyPlaylists {
-      padding-bottom: 120px;
+      padding-bottom: 120px; 
   }
-
   .seekbar {
     width: calc(100% - 24px);
-    margin: 6px auto;
-    left: 12px;
   }
   .hamburger {
     display: block;
@@ -390,11 +402,7 @@ body {
       align-items: center;
       justify-content: center;
   }
-  .songinfo {
-      width: 100%;
-      text-align: center;
-  }
-  .songtime {
+  .songinfo, .songtime {
       width: 100%;
       text-align: center;
   }
