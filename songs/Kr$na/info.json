@@ -1,0 +1,39 @@
+{
+  "title": "Kr$na Hits",
+  "description": "Best of kr$na Songs",
+  "songs": [
+    {
+    "name":"Blowing Up.mp3",
+    "artist":"Kr$na"
+    },
+    
+    {
+    "name":"Hola Amigo.mp3",
+    "artist":"Kr$na"
+    },
+
+    {
+    "name":"I Guess.mp3",
+    "artist":"Kr$na"
+    },
+
+    {
+    "name":"Knock Knock.mp3",
+    "artist":"Kr$na"
+    },
+
+    {
+    "name":"Machayenge4.mp3",
+    "artist":"Kr$na"
+    },
+
+    {
+    "name":"Makasam.mp3",
+    "artist":"Kr$na"
+    },
+    {
+    "name":"No Cap.mp3",
+    "artist":"Kr$na"
+    }
+]
+}

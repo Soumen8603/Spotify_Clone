@@ -1,0 +1,36 @@
+{
+  "title": "Fossils Hits",
+  "description": "Best of Rupam Islam Songs",
+  "songs": [
+    {
+    "name":"Aro Ekbar.mp3",
+    "artist":"Rupam Islam"
+    },
+    
+    {
+    "name":"Ekla Ghor.mp3",
+    "artist":"Rupam Islam"
+    },
+
+    {
+    "name":"Hansnuhana.mp3",
+    "artist":"Rupam Islam"
+    },
+
+    {
+    "name":"Keno Korle Erokom.mp3",
+    "artist":"Rupam Islam"
+    },
+
+    {
+    "name":"Khoro Amar Fossils.mp3",
+    "artist":"Rupam Islam"
+    },
+
+    {
+    "name":"Nemesis.mp3",
+    "artist":"Rupam Islam"
+    }
+    
+]
+}

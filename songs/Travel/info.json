@@ -1,0 +1,36 @@
+{
+  "title": "Travel Mashups",
+  "description": "Best of Travel Songs",
+  "songs": [
+    {
+    "name":"Forever Young.mp3",
+    "artist":"Alphaville"
+    },
+    
+    {
+    "name":"Illahi.mp3",
+    "artist":"Arijit Singh"
+    },
+
+    {
+    "name":"Phir Se Ud Chala.mp3",
+    "artist":"Mohit Chauhan"
+    },
+
+    {
+    "name":"Qaafirana.mp3",
+    "artist":"Arijit Singh & Nikita Gandhi"
+    },
+
+    {
+    "name":"Safarnama.mp3",
+    "artist":"Lucky Ali"
+    },
+
+    {
+    "name":"Sooraj Dooba Hain.mp3",
+    "artist":"Arijit Singh"
+    }
+    
+]
+}

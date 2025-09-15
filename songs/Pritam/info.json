@@ -1,0 +1,35 @@
+{
+  "title": "Pritam Hits",
+  "description": "Best of Prita,",
+  "songs": [
+    {
+    "name":"Dil Ibadaat.mp3",
+    "artist":"Pritam"
+    },
+    
+    {
+    "name":"Dooriyan.mp3",
+    "artist":"Pritam"
+    },
+
+    {
+    "name":"Kaho Na Kaho.mp3",
+    "artist":"Pritam"
+    },
+
+    {
+    "name":"Pee Loon.mp3",
+    "artist":"Pritam"
+    },
+
+    {
+    "name":"Teri Jhuki Nazar.mp3",
+    "artist":"Pritam"
+    },
+
+    {
+    "name":"Tune Jo Na Kaha.mp3",
+    "artist":"Pritam"
+    }
+]
+}

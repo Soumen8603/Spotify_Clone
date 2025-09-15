@@ -28,7 +28,8 @@ async function getSongs(folder) {
   songUL.innerHTML = "";
   for (const song of songs) {
     if (!song) continue;
-    songUL.innerHTML += `<li>
+    let isPlaying = currentSong.src.includes(song.name);
+    songUL.innerHTML += `<li class="${isPlaying ? "playing" : ""}">
       <img class="invert" src="img/music.svg" alt="">
       <div class="info">
         <div>${song.name.replaceAll("%20", " ").replace(".mp3", "")}</div>
@@ -69,20 +70,37 @@ const playMusic = (track, pause = false) => {
     if (window.play) window.play.src = "img/pause.svg";
   }
   document.querySelector(".songtime").textContent = "00:00 / 00:00";
+  
+  Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(li => {
+      li.classList.remove("playing");
+  });
+  
+  const trackNameOnly = track.replaceAll("%20", " ").replace(".mp3", "");
+  const currentLi = Array.from(document.querySelector(".songList").getElementsByTagName("li")).find(li => li.querySelector(".info").firstElementChild.textContent.trim() === trackNameOnly);
+
+  if (currentLi) {
+      currentLi.classList.add("playing");
+  }
 };
 
 async function displayAlbums() {
+  const cardContainer = document.querySelector(".cardContainer");
+  const loader = document.querySelector(".loader");
+  
+  loader.style.display = "block";
+  cardContainer.innerHTML = "";
+
   let a = await fetch(`songs/albums.json`);
   let albums = await a.json();
-  const cardContainer = document.querySelector(".cardContainer");
-  cardContainer.innerHTML = "";
+
+  loader.style.display = "none";
 
   for (const album of albums) {
     cardContainer.innerHTML += `
       <div data-folder="${album.folder}" class="card">
         <div class="play">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 20V4L19 12L5 20Z" stroke="#000000" fill="#000000" stroke-width="1.5" stroke-linejoin="round" />
           </svg>
         </div>
         <img src="songs/${album.folder}/cover.jpg" alt="">
@@ -143,7 +161,6 @@ async function main() {
       let index = getCurrentIndex();
       if (index !== -1) {
         const prevIdx = index - 1 >= 0 ? index - 1 : songs.length - 1;
-        // Instantly reset the timer for better UX
         document.querySelector(".songtime").textContent = "00:00 / 00:00";
         playMusic(songs[prevIdx].name);
       }
@@ -155,7 +172,6 @@ async function main() {
       let index = getCurrentIndex();
       if (index !== -1) {
         const nextIdx = index + 1 < songs.length ? index + 1 : 0;
-        // Instantly reset the timer for better UX
         document.querySelector(".songtime").textContent = "00:00 / 00:00";
         playMusic(songs[nextIdx].name);
       }
@@ -163,8 +179,11 @@ async function main() {
   }
 
   currentSong.addEventListener("timeupdate", () => {
-    document.querySelector(".songtime").textContent = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`;
-    document.querySelector(".circle").style.left = (currentSong.currentTime / (currentSong.duration || 1)) * 100 + "%";
+    // Only update the time if the user is NOT dragging the circle
+    if (!document.body.classList.contains('dragging')) {
+        document.querySelector(".songtime").textContent = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`;
+        document.querySelector(".circle").style.left = (currentSong.currentTime / (currentSong.duration || 1)) * 100 + "%";
+    }
   });
 
   currentSong.addEventListener("ended", () => {
@@ -175,10 +194,57 @@ async function main() {
     }
   });
 
-  document.querySelector(".seekbar").addEventListener("click", (e) => {
-    const percent = (e.offsetX / e.target.getBoundingClientRect().width);
-    document.querySelector(".circle").style.left = percent * 100 + "%";
-    currentSong.currentTime = (currentSong.duration || 0) * percent;
+  // Seek by clicking on the seekbar
+  const seekbar = document.querySelector(".seekbar");
+  seekbar.addEventListener("click", (e) => {
+    if (e.target.id !== 'seek-circle') {
+        const percent = (e.offsetX / e.target.getBoundingClientRect().width);
+        document.querySelector(".circle").style.left = percent * 100 + "%";
+        currentSong.currentTime = (currentSong.duration || 0) * percent;
+    }
+  });
+  
+  // Logic for dragging the seekbar circle
+  const circle = document.getElementById("seek-circle");
+  let isDragging = false;
+
+  circle.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      document.body.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+          const rect = seekbar.getBoundingClientRect();
+          let offsetX = e.clientX - rect.left;
+          
+          if (offsetX < 0) offsetX = 0;
+          if (offsetX > rect.width) offsetX = rect.width;
+          
+          let percent = (offsetX / rect.width) * 100;
+          circle.style.left = percent + "%";
+          // Also update the time display in real-time while dragging
+          if (currentSong.duration) {
+              const newTime = (currentSong.duration * percent) / 100;
+              document.querySelector(".songtime").textContent = `${formatTime(newTime)}/${formatTime(currentSong.duration)}`;
+          }
+      }
+  });
+
+  window.addEventListener('mouseup', (e) => {
+      if (isDragging) {
+          isDragging = false;
+          document.body.classList.remove('dragging');
+          
+          const rect = seekbar.getBoundingClientRect();
+          let offsetX = e.clientX - rect.left;
+
+          if (offsetX < 0) offsetX = 0;
+          if (offsetX > rect.width) offsetX = rect.width;
+          
+          let percent = (offsetX / rect.width) * 100;
+          currentSong.currentTime = (currentSong.duration * percent) / 100;
+      }
   });
 
   document.querySelector(".hamburger").addEventListener("click", () => {

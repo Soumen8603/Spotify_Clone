@@ -18,5 +18,26 @@
     "folder": "KK",
     "title": "KK Hits",
     "description": "Best of KK"
+  },
+  {
+    "folder": "Pritam",
+    "title": "Pritam Hits",
+    "description": "Best of pritam"
+  },
+  
+  {
+    "folder": "Kr$na",
+    "title": "Kr$na Hits",
+    "description": "Best of Kr$na"
+  },
+  {
+    "folder": "Fossils",
+    "title": "Rupam Islam Hits",
+    "description": "Best of Rupam Islam"
+  },
+  {
+    "folder": "Travel",
+    "title": "Travel Hits",
+    "description": "Best of Travel Songs"
   }
 ]
