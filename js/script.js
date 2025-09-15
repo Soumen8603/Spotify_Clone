@@ -20,7 +20,6 @@ function getFileNameFromUrl(u) {
 
 async function getSongs(folder) {
   currFolder = folder;
-  // CHANGED: Removed leading slash for relative path
   let a = await fetch(`${folder}/info.json`);
   let response = await a.json();
   songs = response.songs;
@@ -55,7 +54,6 @@ async function getSongs(folder) {
 }
 
 const playMusic = (track, pause = false) => {
-  // CHANGED: Removed leading slash for relative path
   currentSong.src = `${currFolder}/` + track;
 
   const songInfo = songs.find(s => s.name === track);
@@ -74,7 +72,6 @@ const playMusic = (track, pause = false) => {
 };
 
 async function displayAlbums() {
-  // CHANGED: Removed leading slash for relative path
   let a = await fetch(`songs/albums.json`);
   let albums = await a.json();
   const cardContainer = document.querySelector(".cardContainer");
@@ -88,7 +85,6 @@ async function displayAlbums() {
             <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
           </svg>
         </div>
-       
         <img src="songs/${album.folder}/cover.jpg" alt="">
         <h2>${album.title}</h2>
         <p>${album.description}</p>
@@ -104,6 +100,10 @@ async function displayAlbums() {
         if (songs.length > 0) {
           playMusic(songs[0].name);
         }
+        
+        if (window.innerWidth < 768) {
+          document.querySelector(".left").style.left = "0";
+        }
       }
     });
   });
@@ -115,7 +115,6 @@ async function main() {
   const nextBtn = document.getElementById("next");
   window.play = playBtn;
 
-  // CHANGED: Use a relative path for the initial load
   await getSongs("songs/Favourites");
   if (songs.length > 0) {
     playMusic(songs[0].name, true);
@@ -144,6 +143,8 @@ async function main() {
       let index = getCurrentIndex();
       if (index !== -1) {
         const prevIdx = index - 1 >= 0 ? index - 1 : songs.length - 1;
+        // Instantly reset the timer for better UX
+        document.querySelector(".songtime").textContent = "00:00 / 00:00";
         playMusic(songs[prevIdx].name);
       }
     });
@@ -154,6 +155,8 @@ async function main() {
       let index = getCurrentIndex();
       if (index !== -1) {
         const nextIdx = index + 1 < songs.length ? index + 1 : 0;
+        // Instantly reset the timer for better UX
+        document.querySelector(".songtime").textContent = "00:00 / 00:00";
         playMusic(songs[nextIdx].name);
       }
     });

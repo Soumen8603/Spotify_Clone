@@ -535,7 +535,7 @@ body {
     white-space: nowrap;
   }
   .volume {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     min-width: 60px;
