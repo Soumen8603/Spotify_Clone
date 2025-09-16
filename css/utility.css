@@ -1,45 +1,92 @@
-.border{
-  border: 2px solid red;
-  margin: 3px;
+/* =================================
+  CSS Variables (Theme)
+  =================================
+*/
+:root {
+  /* Colors */
+  --color-dark: black;
+  --color-grey-dark: #121212;
+  --color-grey-medium: #1a1a1a;
+  --color-grey-light: #444;
+  --color-white: white;
+  --color-debug: red;
+
+  /* Spacing */
+  --spacing-1: 5px;
+  --spacing-2: 10px;
+  --spacing-3: 15px;
+
+  /* Borders */
+  --border-radius-main: 7px;
 }
 
-.flex{
+/* =================================
+  Layout & Display
+  =================================
+*/
+.flex {
   display: flex;
 }
 
-.justify-center{
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
   justify-content: center;
 }
 
-.items-center{
+.items-center {
   align-items: center;
 }
 
-.bg-black{
-  background-color: black;
-  color: white;
+/* =================================
+  Spacing (Margin & Padding)
+  =================================
+*/
+.m-1 { margin: var(--spacing-1); }
+.m-2 { margin: var(--spacing-2); }
+.m-3 { margin: var(--spacing-3); }
+
+.p-1 { padding: var(--spacing-1); }
+.p-2 { padding: var(--spacing-2); }
+.p-3 { padding: var(--spacing-3); }
+
+.py-2 {
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
 }
 
-.invert{
+/* =================================
+  Colors & Styling
+  =================================
+*/
+.bg-black {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.bg-grey {
+  background-color: var(--color-grey-dark);
+}
+
+.invert {
   filter: invert(1);
 }
 
-.bg-grey{
-  background-color: #121212;
+.rounded {
+  border-radius: var(--border-radius-main);
 }
 
-.rounded{
-  border-radius: 7px;
+.border {
+  border: 2px solid var(--color-debug);
 }
 
-.m-1{
-  margin: 5px;
-}
 
-.p-1{
-  padding: 10px;
-}
-
+/* =================================
+  Browser Specifics
+  =================================
+*/
 /* For Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 10px;
@@ -47,13 +94,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--color-grey-medium);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #444;
+  background-color: var(--color-grey-light);
   border-radius: 10px;
-  border: 2px solid #1a1a1a;
+  border: 2px solid var(--color-grey-medium);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -63,13 +110,13 @@
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #444 #1a1a1a;
+  scrollbar-color: var(--color-grey-light) var(--color-grey-medium);
 }
 
 /* Prevents text selection while dragging seekbar */
 body.dragging * {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }

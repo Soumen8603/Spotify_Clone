@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-:root{
-  --a : 0;
+:root {
+  --a: 0;
 }
 
 /* General Resets and Body */
@@ -144,7 +144,8 @@ body {
   position: relative;
   cursor: pointer;
 }
-.card h2, .card p {
+.card h2,
+.card p {
   margin: 0;
   padding-top: 5px;
   white-space: nowrap;
@@ -152,8 +153,8 @@ body {
   text-overflow: ellipsis;
 }
 .card p {
-    color: #a7a7a7;
-    font-size: 14px;
+  color: #a7a7a7;
+  font-size: 14px;
 }
 .card img {
   width: 100%;
@@ -174,7 +175,7 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 75px; 
+  bottom: 75px;
   right: 15px;
   opacity: 0;
   transition: all 0.3s ease-out;
@@ -182,7 +183,7 @@ body {
 }
 .card:hover .play {
   opacity: 1;
-  bottom: 85px; 
+  bottom: 85px;
 }
 .play svg {
   margin: auto;
@@ -234,6 +235,7 @@ body {
 
 /* Playbar Section */
 .playbar {
+  display: flex;
   position: fixed;
   bottom: 20px;
   filter: invert();
@@ -260,9 +262,11 @@ body {
   justify-content: center;
   gap: 12px;
   flex-grow: 1;
+  align-items: center;
 }
 .songbuttons img {
   cursor: pointer;
+  height: 30px;
 }
 .timevol {
   display: flex;
@@ -333,15 +337,57 @@ body {
   display: none;
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .disclaimer {
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  padding: 20px;
+}
+
+
+/* Search Bar Styling */
+.header .headerSearch {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.library .headerSearch {
+    padding: 10px 20px;
+}
+
+.headerSearch #searchInput {
+    width: 100%;
+    max-width: 400px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2a2a2a;
+  color: white;
+  font-size: 14px;
+  box-sizing: border-box; 
+}
+
+#searchInput::placeholder {
+  color: #a7a7a7;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: #1fdf64;
 }
 
 /* ----------- Responsive Design ----------- */
@@ -350,17 +396,18 @@ body {
   .left {
     position: absolute;
     left: -120%;
-    transition: all .3s;
+    transition: all 0.3s;
     z-index: 10;
-    width: 370px;
+    width: 370px; /* Keep consistent width */
     background-color: black;
   }
   .left .close {
     position: absolute;
-    right: 30px;
-    top: 25px;
+    right: 15px; /* Adjusted right position */
+    top: 15px; /* Adjusted top position */
     width: 30px;
     display: block;
+    z-index: 100; /* High z-index to ensure visibility */
   }
   .right {
     width: 100vw;
@@ -375,12 +422,12 @@ body {
     border-radius: 0;
     margin: 0;
     padding: 10px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     z-index: 10;
-    height: 100px;
+    height: 120px;
   }
   .spotifyPlaylists {
-      padding-bottom: 120px; 
+    padding-bottom: 120px;
   }
   .seekbar {
     width: calc(100% - 24px);
@@ -396,31 +443,113 @@ body {
     width: 44vw;
   }
   .abovebar {
-      flex-direction: column;
-      gap: 5px;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 15px;
+    box-sizing: border-box;
   }
-  .songinfo, .songtime {
-      width: 100%;
-      text-align: center;
+  .songinfo,
+  .songtime {
+    width: 100%;
+    text-align: center;
   }
-  .timevol{
-      flex-direction: row;
-      justify-content: space-between;
-      width: 90%;
+  .timevol {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  /* NEW/MODIFIED: Mobile Header and Button Styling */
+  .header {
+    flex-wrap: wrap; 
+    height: auto; 
+    padding: 10px; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+
+  .header .headerSearch {
+    order: 3; /* Push search to the bottom if it wraps */
+    flex-basis: 100%; /* Take full width if wrapping */
+    padding: 0 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
+
+  .headerSearch #searchInput {
+    max-width: 100%; 
+  }
+  
+  .buttons {
+    order: 2; /* Place buttons after nav/hamburger, before search */
+    display: flex; 
+    gap: 10px; 
+    margin-top: 0; /* Adjust as header has padding */
+    justify-content: flex-end; /* Align buttons to the right */
+    width: auto; /* Allow buttons to take natural width */
+    flex-grow: 1; /* Allow to grow if space permits */
+  }
+
+  .signupbtn, .loginbtn {
+    flex-grow: 0; /* Prevent them from stretching too much */
+    flex-shrink: 1; /* Allow them to shrink if space is tight */
+    max-width: none; /* Remove max-width constraint */
+    text-align: center; 
+    padding: 8px 15px; /* Adjust padding for better look */
+    font-size: 14px; /* Slightly smaller font for mobile */
+  }
+
+  /* Adjust hamburger container for mobile header */
+  .hamburgerCont {
+    order: 1; /* Keep hamburger at the start */
+    gap: 8px; /* Reduce gap */
+  }
+
+  /* When the search bar is in the library (left panel) */
+  .library .headerSearch {
+      padding: 10px 20px;
+      width: calc(100% - 40px); 
+      box-sizing: border-box; 
+      /* Make sure input within library search also matches */
+      #searchInput {
+          max-width: none; /* No max width in sidebar */
+      }
+  }
+
+  /* Hide navigation (hamburger and arrows) in the header when search is active - this part is mostly for if you bring back JS that adds a 'search-active' class */
+  .header.search-active .nav {
+    display: none;
+  }
+  .header.search-active .headerSearch {
+    flex-grow: 1;
+    padding: 0 15px;
+    max-width: 100%;
+  }
+  .header.search-active .hamburgerCont {
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
-    .card {
-        width: 80vw;
-    }
-    .volume {
-        display: none;
-    }
-    .timevol{
-        justify-content: center;
-    }
+  .card {
+    width: 80vw;
+  }
+  .volume {
+    display: none;
+  }
+  .timevol {
+    justify-content: center;
+  }
+
+  /* Further refinements for very small screens */
+  .header .hamburgerCont {
+      margin-right: auto; /* Push hamburger to the left */
+  }
+
+  .header .buttons {
+      margin-left: auto; /* Push buttons to the right */
+      flex-grow: 0;
+  }
 }
